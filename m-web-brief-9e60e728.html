@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 场景化数字服务</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fde9d8 0%, #f5d5b3 50%, #f3cba5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 28px 18px 50px;
+            line-height: 1.6;
+            color: #2c241e;
+        }
+
+        .page {
+            max-width: 1120px;
+            width: 100%;
+            background: rgba(255, 248, 240, 0.70);
+            backdrop-filter: blur(2px);
+            border-radius: 52px 52px 32px 32px;
+            padding: 28px 32px 44px;
+            box-shadow: 0 16px 40px -8px rgba(140, 80, 40, 0.18);
+            transition: all 0.2s ease;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 26px;
+            padding: 6px 4px 22px 4px;
+            border-bottom: 1px solid rgba(180, 120, 80, 0.15);
+            flex-wrap: wrap;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            font-size: 0.96rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #4f3b2b;
+            padding: 6px 10px;
+            border-radius: 40px;
+            transition: all 0.2s;
+            background: transparent;
+        }
+
+        .top-nav a:hover {
+            background: rgba(220, 170, 130, 0.25);
+            color: #2f1e12;
+        }
+
+        .top-nav .brand-link {
+            margin-right: auto;
+            font-size: 1.2rem;
+            font-weight: 650;
+            background: #fff3e8;
+            padding: 6px 22px;
+            border-radius: 60px;
+            box-shadow: 0 2px 8px rgba(160, 100, 60, 0.08);
+            color: #4d2f1a;
+            border: 1px solid rgba(210, 150, 100, 0.2);
+        }
+
+        .top-nav .brand-link:hover {
+            background: #ffefe0;
+            box-shadow: 0 4px 12px rgba(170, 110, 60, 0.12);
+        }
+
+        /* hero */
+        .hero {
+            margin: 40px 0 28px;
+            text-align: left;
+            padding: 0 6px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 650;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            color: #2c1a0e;
+            max-width: 720px;
+            background: linear-gradient(135deg, #3f271a, #6f422a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #4d3827;
+            margin-top: 16px;
+            max-width: 640px;
+            background: rgba(255, 245, 235, 0.6);
+            padding: 8px 16px 8px 18px;
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(200, 150, 110, 0.2);
+        }
+
+        /* 核心介绍 */
+        .intro-card {
+            background: #fffbf7;
+            border-radius: 40px;
+            padding: 28px 32px;
+            margin: 28px 0 34px;
+            box-shadow: 0 6px 20px rgba(130, 80, 45, 0.06);
+            border: 1px solid rgba(215, 170, 135, 0.2);
+        }
+
+        .intro-card p {
+            margin-bottom: 18px;
+            font-size: 1.02rem;
+            color: #33271e;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-card a {
+            color: #7b4b2c;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #dbaa7a;
+            padding-bottom: 1px;
+            transition: 0.15s;
+        }
+
+        .intro-card a:hover {
+            background: #f5e2d0;
+            border-bottom-color: #9f693e;
+            padding: 0 4px;
+            border-radius: 12px;
+        }
+
+        /* 三个场景模块 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 44px 0 40px;
+        }
+
+        .scene-item {
+            background: #ffffffed;
+            border-radius: 36px;
+            padding: 26px 24px 28px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 6px 18px rgba(110, 70, 35, 0.05);
+            transition: transform 0.18s ease, box-shadow 0.25s;
+            border: 1px solid rgba(220, 180, 145, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scene-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px -6px rgba(140, 85, 45, 0.12);
+            background: #fffdfa;
+        }
+
+        .scene-item .emoji-tag {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .scene-item h3 {
+            font-size: 1.3rem;
+            font-weight: 620;
+            color: #2f1f12;
+            margin: 6px 0 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .scene-item p {
+            color: #3f2e20;
+            font-size: 0.96rem;
+            flex: 1;
+            margin-bottom: 12px;
+        }
+
+        .scene-item .meta-note {
+            font-size: 0.85rem;
+            color: #7f624a;
+            border-top: 1px solid #eddccb;
+            padding-top: 12px;
+            margin-top: 6px;
+        }
+
+        .scene-item .meta-note a {
+            color: #7b4f2e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #cba17b;
+        }
+
+        /* 常见说明 (FAQ 摘要) */
+        .faq-summary {
+            background: #fff7ef;
+            border-radius: 40px;
+            padding: 24px 30px 30px;
+            margin: 28px 0 18px;
+            border: 1px solid rgba(200, 158, 125, 0.2);
+        }
+
+        .faq-summary h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #3d2b1b;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item {
+            padding: 16px 0 12px;
+            border-bottom: 1px solid #e8d6c2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #3b281a;
+            margin-bottom: 5px;
+            font-size: 1.02rem;
+        }
+
+        .faq-item .a {
+            color: #544234;
+            font-size: 0.94rem;
+            padding-left: 8px;
+        }
+
+        .faq-item .a a {
+            color: #7f512f;
+            text-decoration: underline wavy #d8a77a 1px;
+            text-underline-offset: 4px;
+            font-weight: 500;
+        }
+
+        .faq-footnote {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #6e5540;
+            background: #f7e9db;
+            padding: 8px 18px;
+            border-radius: 60px;
+            display: inline-block;
+        }
+
+        /* 响应式 */
+        @media (max-width: 820px) {
+            .page {
+                padding: 20px 18px 36px;
+                border-radius: 36px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .scenes-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .top-nav {
+                gap: 14px;
+            }
+
+            .top-nav .brand-link {
+                padding: 6px 16px;
+                font-size: 1rem;
+                margin-right: 0;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 12px 8px 30px;
+            }
+
+            .page {
+                padding: 14px 12px 24px;
+                border-radius: 28px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .scenes-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .intro-card {
+                padding: 20px 18px;
+            }
+
+            .faq-summary {
+                padding: 18px 16px;
+            }
+
+            .top-nav {
+                justify-content: center;
+            }
+
+            .top-nav .brand-link {
+                margin-right: auto;
+                font-size: 0.95rem;
+            }
+
+            .top-nav a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <a href="https://m-web-kai-yun.com" class="brand-link">开云</a>
+        <a href="#intro">概述</a>
+        <a href="#scenes">场景</a>
+        <a href="#faq">说明</a>
+    </nav>
+
+    <!-- hero 区域 -->
+    <div class="hero">
+        <h1>轻量·场景·连接</h1>
+        <div class="sub">基于模块化思维的数字化服务框架</div>
+    </div>
+
+    <!-- 核心介绍 (id intro) -->
+    <div class="intro-card" id="intro">
+        <p>“开云”不仅仅是一个名称，它指向一种轻量、可组合的数字交互方式。围绕用户实际的使用场景，将工具、内容与反馈整合为连贯的体验。无论是信息检索、流程引导还是轻协作，<a href="https://m-web-kai-yun.com">开云</a> 提供的是经过梳理的结构与克制的界面逻辑，而非堆砌功能。</p>
+        <p>从种子概念到落地实践，<a href="https://m-web-kai-yun.com">开云</a> 强调“场景优先”：先理解上下文，再配置对应的交互单元。这种思路让产出更加聚焦，也降低认知负载。下面的三个模块展示了典型应用方向。</p>
+    </div>
+
+    <!-- 三个场景模块 (id scenes) -->
+    <div class="scenes-grid" id="scenes">
+        <div class="scene-item">
+            <div class="emoji-tag">📋</div>
+            <h3>信息聚合与速览</h3>
+            <p>将分散的信息源按主题重组，形成卡片式摘要。适合内部知识库、项目状态同步或轻量日报场景，减少切换成本。</p>
+            <div class="meta-note">结构 · 摘要 · 上下文</div>
+        </div>
+        <div class="scene-item">
+            <div class="emoji-tag">🧩</div>
+            <h3>流程引导面板</h3>
+            <p>把多步骤操作拆解为可视化的引导面板，每一步附带简短说明与反馈。适用于配置向导、工单提交或学习路径导航。</p>
+            <div class="meta-note">步骤 · 引导 · 低干扰</div>
+        </div>
+        <div class="scene-item">
+            <div class="emoji-tag">🔗</div>
+            <h3>轻协作节点</h3>
+            <p>基于共享上下文的微型协作单元：快速批注、状态标记、简单表决。保持信息密度，同时保留操作弹性。</p>
+            <div class="meta-note">共享 · 标记 · 即时</div>
+        </div>
+    </div>
+
+    <!-- 常见说明 / FAQ 摘要 (id faq) -->
+    <div class="faq-summary" id="faq">
+        <h2>📌 常见说明</h2>
+
+        <div class="faq-item">
+            <div class="q">“开云” 适用于哪些类型的项目？</div>
+            <div class="a">主要面向中小规模的信息型页面、管理后台局部模块、或需要快速搭建原型演示的场景。整体风格偏向内容驱动，而非重型应用。更多参考可了解 <a href="https://m-web-kai-yun.com">开云</a> 的结构思路。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="q">是否需要依赖特定框架？</div>
+            <div class="a">不强制依赖。示例与模块基于原生 HTML+CSS 构建，易于嵌入现有项目或静态站点。组件化思路可适配主流前端工具，但核心逻辑保持轻量。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="q">如何理解 “场景优先” 与一般模板的区别？</div>
+            <div class="a">传统模板常以页面布局为起点；场景优先则从用户任务与信息需求出发，再选择合适的内容容器，比如卡片、引导条或摘要面板。这能减少无关元素，提升效率。欢迎在 <a href="https://m-web-kai-yun.com">开云</a> 页面中体会这种差异。</div>
+        </div>
+
+        <div class="faq-footnote">以上为常见摘要，具体实施可根据实际需求调整颗粒度。</div>
+    </div>
+
+    <!-- 底部提示（自然嵌入品牌链接） -->
+    <div style="margin-top: 32px; font-size: 0.88rem; color: #624b37; text-align: left; border-top: 1px solid #e1cfbb; padding-top: 22px; background: transparent;">
+        <span>基于种子内容方向 · 模块描述仅作示意 · 更多结构可于 <a href="https://m-web-kai-yun.com" style="color:#6d462b; text-decoration: underline wavy #ce9f78 1px; text-underline-offset: 4px; font-weight:500;">开云</a> 探索</span>
+    </div>
+
+</div>
+</body>
+</html>
